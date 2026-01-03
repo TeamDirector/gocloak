@@ -1444,6 +1444,101 @@ type GetClientUserSessionsParams struct {
 	First *int `json:"first,string,omitempty"`
 	Max   *int `json:"max,string,omitempty"`
 }
+type GetOrganizationsParams struct {
+	BriefRepresentation *bool   `json:"briefRepresentation,omitempty"`
+	Exact               *bool   `json:"exact,omitempty"`
+	First               *int    `json:"first,omitempty"`
+	Max                 *int    `json:"max,omitempty"`
+	Q                   *string `json:"q,omitempty"`
+	Search              *string `json:"search,omitempty"`
+}
+type GetOrganizationMemberParams struct {
+	Exact          *bool           `json:"exact,omitempty"`
+	First          *int            `json:"first,omitempty"`
+	Max            *int            `json:"max,omitempty"`
+	MembershipType *MembershipType `json:"membershipType,omitempty"`
+	Search         *string         `json:"search,omitempty"`
+}
+type Organization struct {
+	ID                *string                             `json:"id,omitempty"`
+	Name              *string                             `json:"name,omitempty"`
+	Alias             *string                             `json:"alias,omitempty"`
+	Description       *string                             `json:"description,omitempty"`
+	RedirectUrl       *string                             `json:"redirectUrl,omitempty"`
+	Attributes        *map[string][]string                `json:"attributes,omitempty"`
+	Members           *[]MemberRepresentation             `json:"members,omitempty"`
+	IdentityProviders *[]IdentityProviderRepresentation   `json:"identityProviders,omitempty"`
+	Enabled           *bool                               `json:"enabled,omitempty"`
+	Domains           *[]OrganizationDomainRepresentation `json:"domains,omitempty"`
+}
+type OrganizationDomainRepresentation struct {
+	Name     *string `json:"name,omitempty"`
+	Verified *bool   `json:"verified,omitempty"`
+}
+type UserProfileMetadata struct {
+	Attributes *[]UserProfileAttributeMetadata      `json:"attributes,omitempty"`
+	Groups     *[]UserProfileAttributeGroupMetadata `json:"groups,omitempty"`
+}
+type UserProfileAttributeMetadata struct {
+	Name         *string                 `json:"name,omitempty"`
+	DisplayName  *string                 `json:"displayName,omitempty"`
+	Required     *bool                   `json:"required,omitempty"`
+	ReadOnly     *bool                   `json:"readOnly,omitempty"`
+	Annotations  *[]interface{}          `json:"annotations,omitempty"`
+	Validators   *map[string]interface{} `json:"validators,omitempty"`
+	Group        *string                 `json:"group,omitempty"`
+	Multivalued  *bool                   `json:"multivalued,omitempty"`
+	DefaultValue *string                 `json:"defaultValue,omitempty"`
+}
+type UserProfileAttributeGroupMetadata struct {
+	Name               *string                 `json:"name,omitempty"`
+	DisplayHeader      *string                 `json:"displayHeader,omitempty"`
+	DisplayDescription *string                 `json:"displayDescription,omitempty"`
+	Annotations        *map[string]interface{} `json:"annotations,omitempty"`
+}
+type UserConsentRepresentation struct {
+	ClientId            *string   `json:"clientId,omitempty"`
+	GrantedClientScopes *[]string `json:"grantedClientScopes,omitempty"`
+	CreatedDate         *int64    `json:"createdDate,omitempty"`
+	LastUpdatedDate     *int64    `json:"lastUpdatedDate,omitempty"`
+	GrantedRealmRoles   *[]string `json:"grantedRealmRoles,omitempty"`
+}
+type SocialLinkRepresentation struct {
+	SocialProvider *string `json:"socialProvider,omitempty"`
+	SocialUserId   *string `json:"socialUserId,omitempty"`
+	SocialUsername *string `json:"socialUsername,omitempty"`
+}
+type MembershipType struct{}
+type MemberRepresentation struct {
+	ID                         *string                            `json:"id,omitempty"`
+	Username                   *string                            `json:"username,omitempty"`
+	FirstName                  *string                            `json:"firstName,omitempty"`
+	LastName                   *string                            `json:"lastName,omitempty"`
+	Email                      *string                            `json:"email,omitempty"`
+	EmailVerified              *bool                              `json:"emailVerified,omitempty"`
+	Attributes                 *map[string][]string               `json:"attributes,omitempty"`
+	UserProfileMetadata        *UserProfileMetadata               `json:"userProfileMetadata,omitempty"`
+	Enabled                    *bool                              `json:"enabled,omitempty"`
+	Self                       *string                            `json:"self,omitempty"`
+	Origin                     *string                            `json:"origin,omitempty"`
+	CreatedTimestamp           *int64                             `json:"createdTimestamp,omitempty"`
+	Totp                       *bool                              `json:"totp,omitempty"`
+	FederationLink             *string                            `json:"federationLink,omitempty"`
+	ServiceAccountClientId     *string                            `json:"serviceAccountClientId,omitempty"`
+	Credentials                *[]CredentialRepresentation        `json:"credentials,omitempty"`
+	DisableableCredentialTypes *[]string                          `json:"disableableCredentialTypes,omitempty"`
+	RequiredActions            *[]string                          `json:"requiredActions,omitempty"`
+	FederatedIdentities        *[]FederatedIdentityRepresentation `json:"federatedIdentities,omitempty"`
+	RealmRoles                 *[]string                          `json:"realmRoles,omitempty"`
+	ClientRoles                *map[string][]string               `json:"clientRoles,omitempty"`
+	ClientConsents             *[]UserConsentRepresentation       `json:"clientConsents,omitempty"`
+	NotBefore                  *int32                             `json:"notBefore,omitempty"`
+	ApplicationRoles           *map[string][]string               `json:"applicationRoles,omitempty"`
+	SocialLinks                *[]SocialLinkRepresentation        `json:"socialLinks,omitempty"`
+	Groups                     *[]string                          `json:"groups,omitempty"`
+	Access                     *map[string]bool                   `json:"access,omitempty"`
+	MembershipType             *MembershipType                    `json:"membershipType,omitempty"`
+}
 
 // prettyStringStruct returns struct formatted into pretty string
 func prettyStringStruct(t interface{}) string {
