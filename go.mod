@@ -1,4 +1,4 @@
-module github.com/TeamDirector/gocloak
+module github.com/TeamDirector/gocloak/v14
 
 go 1.23.0
 
